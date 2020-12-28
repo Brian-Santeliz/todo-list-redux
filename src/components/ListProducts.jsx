@@ -1,24 +1,34 @@
+import ListGroupItem from './ListGroupItem'
 const ListProducts = () => {
-    return ( 
-        <div className="container">
-            <div className="d-flex justify-content-center">
-                <table className="table table-bordered">
-                    <td>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Description
-                        </th>
-                        <th>
-                            Price
-                        </th>
+  const items = [
+    {
+      name: "example",
+      badge: "Eliminar",
+    },
+    {
+      name: "example",
+      badge: "Eliminar",
+    },
+    {
+      name: "example",
+      badge: "Eliminar",
+    },
+    {
+      name: "example",
+      badge: "Eliminar",
+    },
+    {
+      name: "example",
+      badge: "Eliminar",
+    },
+  ];
+  return (
+    <ul className="list-group list-group-list-group-flush">
+      {items.map((item,i)=>(
+          <ListGroupItem key={i} item={item}/>
+      ))}
+    </ul>
+  );
+};
 
-                    </td>
-                </table>
-            </div>
-        </div>
-);
-}
- 
 export default ListProducts;
