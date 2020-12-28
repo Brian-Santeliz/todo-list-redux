@@ -1,8 +1,10 @@
 import { useState } from "react";
-
+import { addTask } from "./redux/actions";
+import { useDispatch } from "react-redux";
 const Form = () => {
   const [form, setForm] = useState("");
   const [error, setError] = useState(false);
+  const dispatch = useDispatch();
   const validateForm = (formData) => {
     if (formData.trim() === "") {
       setError(true);
@@ -14,6 +16,7 @@ const Form = () => {
     e.preventDefault();
     validateForm(form);
     //TODO  HACER DISPATCH DE LA ACCION
+    dispatch(addTask(form));
     setForm("");
   };
   const errorMessage = error && (
