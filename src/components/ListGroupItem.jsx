@@ -1,13 +1,14 @@
-import React from 'react'
-
-const ListGroupItem = ({item}) => {
+import {useDispatch} from 'react-redux'
+import {deleteTask} from './redux/actions'
+const ListGroupItem = ({item, id}) => {
+   const dispatch = useDispatch()
    const handleDeleteClick = e=>{
-      console.log(e.target)
+      dispatch(deleteTask(id))
    }
      return(
         <li className="list-group-item d-flex justify-content-between align-items-center">
            {item}
-           <button className="btn btn-danger" onClick={handleDeleteClick}>ELIMINAR</button>
+           <button className="btn btn-danger" onClick={()=>handleDeleteClick(id)}>ELIMINAR</button>
          </li>
     )}
 

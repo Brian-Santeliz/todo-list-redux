@@ -6,7 +6,7 @@ const ListProducts = () => {
     <ul className="list-group list-group-list-group-flush">
       {
        !todos.length ? <p className="text-uppercase font-weight-bold">Don't have task</p> : todos.map(({id, task})=>(
-          <ListGroupItem key={id} item={task}/>
+          <ListGroupItem key={id} item={task} id={id}/>
       ))}
     </ul>
   );
