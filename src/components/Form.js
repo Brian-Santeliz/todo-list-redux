@@ -40,7 +40,8 @@ const Form = () => {
               name="name"
               id="name"
               className="form-control"
-              placeholder="Writle a task..."
+              placeholder="Write a task..."
+              autoFocus
             />
           </div>
           <button type="submit" className="btn btn-info">
