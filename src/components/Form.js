@@ -8,19 +8,22 @@ const Form = () => {
   const validateForm = (formData) => {
     if (formData.trim() === "") {
       setError(true);
+      return true;
     } else {
       setError(false);
+      return false;
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    validateForm(form);
-    //TODO  HACER DISPATCH DE LA ACCION
-    dispatch(addTask(form));
+    const isError = validateForm(form);
+    if (!isError) {
+      dispatch(addTask(form));
+    }
     setForm("");
   };
   const errorMessage = error && (
-    <div className="alert alert-danger">Todos los campos son necesarios</div>
+    <div className="alert alert-danger text-center">The task is required</div>
   );
   return (
     <div className="col-md-4">
