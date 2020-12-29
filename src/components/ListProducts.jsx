@@ -1,7 +1,11 @@
+import {useEffect} from 'react';
 import ListGroupItem from './ListGroupItem'
 import {useSelector} from 'react-redux'
 const ListProducts = () => {
   const {todos}= useSelector(state=>state.todo)
+  useEffect(()=>{
+    localStorage.setItem("todos", JSON.stringify(todos))
+  },[todos])
   return (
     <ul className="list-group list-group-list-group-flush">
       {
