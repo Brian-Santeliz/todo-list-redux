@@ -35,14 +35,14 @@ export const deleteTask = (id) => {
   };
 };
 
-export const updateTask = (id) => {
-  if (!id) {
+export const updateTask = (payload) => {
+  if (!payload) {
     return {
       type: UPDATE_TASK_ERROR,
     };
   }
   return {
     type: UPDATE_TASK,
-    payload: id,
+    payload,
   };
 };
