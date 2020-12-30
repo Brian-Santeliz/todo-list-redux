@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { store } from "../components/redux/store";
 import Form from "../components/Form";
 import "@testing-library/jest-dom/extend-expect";
+// Mock to dispatch funtion
+const dispatchMock = jest.spyOn(store, "dispatch");
 
 beforeAll(() =>
   render(
@@ -30,7 +32,6 @@ test("Testing to <Form /> component", () => {
 
   //Valid alert message error
   userEvent.click(botonSave);
-
   const alertMessage = screen.queryByTestId("alert");
   expect(alertMessage.textContent).toBe("The task is required");
   expect(alertMessage.textContent).not.toBe("The task is Required");
@@ -39,4 +40,7 @@ test("Testing to <Form /> component", () => {
   //Write input and submit form
   userEvent.type(inputTask, "Testing with JEST and TDD");
   userEvent.click(botonSave);
+  expect(alertMessage).not.toBeInTheDocument();
+  expect(dispatchMock).toHaveBeenCalled();
+  expect(dispatchMock).not.toHaveBeenCalledTimes(2);
 });
