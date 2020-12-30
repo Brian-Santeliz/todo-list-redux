@@ -23,7 +23,7 @@ const Form = () => {
     setForm("");
   };
   const errorMessage = error && (
-    <div className="alert alert-danger text-center text-capitalize">
+    <div className="alert alert-danger text-center text-capitalize" data-testid="alert">
       The task is required
     </div>
   );
@@ -47,9 +47,10 @@ const Form = () => {
               className="form-control"
               placeholder="Write a task..."
               autoFocus
+              data-testid="inputTask"
             />
           </div>
-          <button type="submit" className="btn btn-info">
+          <button type="submit" className="btn btn-info" data-testid="boton">
             Save
           </button>
         </form>
