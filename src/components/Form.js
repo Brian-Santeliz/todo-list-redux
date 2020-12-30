@@ -23,7 +23,9 @@ const Form = () => {
     setForm("");
   };
   const errorMessage = error && (
-    <div className="alert alert-danger text-center">The task is required</div>
+    <div className="alert alert-danger text-center text-capitalize">
+      The task is required
+    </div>
   );
   return (
     <div className="col-md-4">
