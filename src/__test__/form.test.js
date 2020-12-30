@@ -15,6 +15,11 @@ test("Render <Form /> component, show a button and input", () => {
   const btnText = screen.getByText("Save");
 
   expect(botonSave).toBeInTheDocument();
-  expect(inputTask).toBeInTheDocument();
+  expect(botonSave.tagName).toBe("BfUTTON");
+  expect(botonSave.tagName).not.toBe("INPUT");
   expect(btnText).toBeInTheDocument();
+  expect(btnText.textContent).not.toBe("Guardar");
+  expect(inputTask).toBeInTheDocument();
+  expect(inputTask.tagName).toBe("INPUT");
+  expect(inputTask.tagName).not.toBe("button");
 });
