@@ -1,17 +1,20 @@
-import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import { render, screen, cleanup } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { store } from "../components/redux/store";
 import Form from "../components/Form";
 import "@testing-library/jest-dom/extend-expect";
 
-afterEach(cleanup);
-
-test("Testing to <Form /> component", () => {
+beforeAll(() =>
   render(
     <Provider store={store}>
       <Form />
     </Provider>
-  );
+  )
+);
+afterEach(cleanup);
+
+test("Testing to <Form /> component", () => {
   const botonSave = screen.getByTestId("boton");
   const inputTask = screen.getByTestId("inputTask");
 
@@ -25,9 +28,15 @@ test("Testing to <Form /> component", () => {
   expect(inputTask.tagName).toBe("INPUT");
   expect(inputTask.tagName).not.toBe("BUTTON");
 
-  fireEvent.click(botonSave);
-  const alertMessage = screen.getByTestId("alert");
+  //Valid alert message error
+  userEvent.click(botonSave);
+
+  const alertMessage = screen.queryByTestId("alert");
   expect(alertMessage.textContent).toBe("The task is required");
   expect(alertMessage.textContent).not.toBe("The task is Required");
   expect(alertMessage).toBeInTheDocument();
+
+  //Write input and submit form
+  userEvent.type(inputTask, "Testing with JEST and TDD");
+  userEvent.click(botonSave);
 });
