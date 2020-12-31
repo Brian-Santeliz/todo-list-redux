@@ -49,4 +49,5 @@ test("Testing to <App /> component", () => {
   expect(emptyMessage.textContent).toBe("Don't have task");
   expect(screen.queryByTestId("empty-message")).toBeInTheDocument();
   expect(list).not.toBeInTheDocument();
+  expect(btnEliminar).not.toBeInTheDocument();
 });
