@@ -19,8 +19,12 @@ const ListGroupItem = ({ item }) => {
       <span style={{ textDecoration: state ? "line-through" : "" }}>
         {task}
       </span>
-      <button className="btn btn-danger" onClick={() => handleDeleteClick(id)}>
-        ELIMINAR
+      <button
+        className="btn btn-danger"
+        onClick={() => handleDeleteClick(id)}
+        data-testid="btn-delete"
+      >
+        DELETE
       </button>
     </li>
   );

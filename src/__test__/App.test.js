@@ -3,7 +3,6 @@ import { render, screen, cleanup } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../components/redux/store";
 import userEvent from "@testing-library/user-event";
-
 beforeAll(() =>
   render(
     <Provider store={store}>
@@ -21,17 +20,32 @@ test("Testing to <App /> component", () => {
 
   expect(navbar).toBeInTheDocument();
   expect(navbar.textContent).toBe("Todo list Redux");
-  expect(navbar.textContent).not.toBe("Todo List Redux");
   expect(navbar.tagName).toBe("NAV");
-  expect(navbar.tagName).not.toBe("HEADER");
   expect(emptyMessage).toBeInTheDocument();
   expect(emptyMessage.textContent).toBe("Don't have task");
+
   expect(list).not.toBeInTheDocument();
+  expect(screen.queryByTestId("btn-delete")).not.toBeInTheDocument();
+  expect(navbar.tagName).not.toBe("HEADER");
+  expect(navbar.textContent).not.toBe("Todo List Redux");
 
   userEvent.type(inputTask, "Testing app with Jest & Testin-library");
   userEvent.click(botonSave);
 
   expect(screen.queryByTestId("list-item")).toBeInTheDocument();
+
   expect(emptyMessage).not.toBeInTheDocument();
   expect(emptyMessage).not.toBe("Don't have task");
+  expect(screen.queryByTestId("list-item").tagName).toBe("LI");
+
+  const btnEliminar = screen.queryByTestId("btn-delete");
+
+  expect(btnEliminar.textContent).toBe("DELETE");
+  expect(btnEliminar.tagName).toBe("BUTTON");
+  expect(btnEliminar.className).toBe("btn btn-danger");
+
+  userEvent.click(btnEliminar);
+  expect(emptyMessage.textContent).toBe("Don't have task");
+  expect(screen.queryByTestId("empty-message")).toBeInTheDocument();
+  expect(list).not.toBeInTheDocument();
 });
