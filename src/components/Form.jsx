@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { addTask } from "./redux/actions";
 import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+import { addTask } from "./redux/actions";
 const Form = () => {
   const [form, setForm] = useState("");
-  const [error, setError] = useState(false);
+  const [errorForm, setErrorForm] = useState(false);
   const dispatch = useDispatch();
   const validateForm = (formData) => {
     if (formData.trim() === "") {
-      setError(true);
+      setErrorForm(true);
       return true;
     } else {
-      setError(false);
+      setErrorForm(false);
       return false;
     }
   };
@@ -22,8 +23,11 @@ const Form = () => {
     }
     setForm("");
   };
-  const errorMessage = error && (
-    <div className="alert alert-danger text-center text-capitalize" data-testid="alert">
+  const errorMessage = errorForm && (
+    <div
+      className="alert alert-danger text-center text-capitalize"
+      data-testid="alert"
+    >
       The task is required
     </div>
   );
