@@ -37,6 +37,7 @@ test("Testing to <App /> component", () => {
   expect(emptyMessage).not.toBeInTheDocument();
   expect(emptyMessage).not.toBe("Don't have task");
   expect(screen.queryByTestId("list-item").tagName).toBe("LI");
+  // expect(screen.queryByTestId("list-item")).toMatchSnapshot();
 
   const btnEliminar = screen.queryByTestId("btn-delete");
 

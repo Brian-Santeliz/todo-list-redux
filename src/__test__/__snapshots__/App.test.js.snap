@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing to <App /> component 1`] = `
+<li
+  class="list-group-item d-flex justify-content-between align-items-center"
+  data-testid="list-item"
+  style="cursor: pointer; color: rgb(51, 51, 51);"
+>
+  <span>
+    Testing app with Jest & Testin-library
+  </span>
+  <button
+    class="btn btn-danger"
+    data-testid="btn-delete"
+  >
+    DELETE
+  </button>
+</li>
+`;
