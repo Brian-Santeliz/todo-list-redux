@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "../components/redux/store";
 import Form from "../components/Form";
 import "@testing-library/jest-dom/extend-expect";
-// Mock to dispatch funtion
+// Mock to dispatch funtion submit
 const dispatchMock = jest.spyOn(store, "dispatch");
 
 beforeAll(() =>
