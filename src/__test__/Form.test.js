@@ -35,6 +35,16 @@ test("Testing to <Form /> component", async () => {
     expect(alertMessage).toBeInTheDocument();
   });
 
+  userEvent.type(inputTask, "err");
+  await waitFor(() => {
+    expect(screen.getByTestId("alert").textContent).toBe(
+      "Task have a min length of 4 characters"
+    );
+    expect(screen.getByTestId("alert").textContent).not.toBe(
+      "task have a min length of 4 characters"
+    );
+  });
+
   //Write input and submit form
   userEvent.type(inputTask, "Testing with JEST and TDD");
   userEvent.click(botonSave);
