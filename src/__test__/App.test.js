@@ -1,5 +1,5 @@
 import App from "../App";
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, cleanup, act } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../components/redux/store";
 import userEvent from "@testing-library/user-event";
@@ -28,9 +28,10 @@ test("Testing to <App /> component", () => {
   expect(screen.queryByTestId("btn-delete")).not.toBeInTheDocument();
   expect(navbar.tagName).not.toBe("HEADER");
   expect(navbar.textContent).not.toBe("Todo List Redux");
-
-  userEvent.type(inputTask, "Testing app with Jest & Testin-library");
-  userEvent.click(botonSave);
+  act(() => {
+    userEvent.click(botonSave);
+    userEvent.type(inputTask, "Testing app with Jest & Testin-library");
+  });
 
   expect(screen.queryByTestId("list-item")).toBeInTheDocument();
 

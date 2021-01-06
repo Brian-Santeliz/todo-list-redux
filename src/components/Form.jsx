@@ -13,7 +13,10 @@ const Form = () => {
     <div className="col-md-4">
       <div className="form">
         {error && (
-          <p className="alert-danger p-2 text-center text-uppercase font-weight-bold">
+          <p
+            className="alert-danger p-2 text-center text-uppercase font-weight-bold"
+            data-testid="alert"
+          >
             {error}
           </p>
         )}
