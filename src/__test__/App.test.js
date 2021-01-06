@@ -1,5 +1,5 @@
 import App from "../App";
-import { render, screen, cleanup, act } from "@testing-library/react";
+import { render, screen, cleanup, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../components/redux/store";
 import userEvent from "@testing-library/user-event";
@@ -11,7 +11,7 @@ beforeAll(() =>
   )
 );
 afterAll(() => cleanup);
-test("Testing to <App /> component", () => {
+test("Testing to <App /> component", async () => {
   const navbar = screen.getByTestId("navbar");
   const inputTask = screen.getByTestId("inputTask");
   const botonSave = screen.getByTestId("boton");
@@ -28,18 +28,22 @@ test("Testing to <App /> component", () => {
   expect(screen.queryByTestId("btn-delete")).not.toBeInTheDocument();
   expect(navbar.tagName).not.toBe("HEADER");
   expect(navbar.textContent).not.toBe("Todo List Redux");
-  act(() => {
-    userEvent.click(botonSave);
-    userEvent.type(inputTask, "Testing app with Jest & Testin-library");
+  userEvent.type(inputTask, "Testing app with Jest & Testin-library");
+  userEvent.click(botonSave);
+  await waitFor(() => {
+    expect(screen.queryByTestId("list-item")).toBeInTheDocument();
   });
-
-  expect(screen.queryByTestId("list-item")).toBeInTheDocument();
 
   expect(emptyMessage).not.toBeInTheDocument();
   expect(emptyMessage).not.toBe("Don't have task");
   expect(screen.queryByTestId("list-item").tagName).toBe("LI");
   // expect(screen.queryByTestId("list-item")).toMatchSnapshot();
 
+  userEvent.click(screen.queryByTestId("list-item"));
+  expect(screen.queryByTestId("list-item")).toHaveStyle({
+    cursor: "pointer",
+    color: "#bdbbbb",
+  });
   const btnEliminar = screen.queryByTestId("btn-delete");
 
   expect(btnEliminar.textContent).toBe("DELETE");
